@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geolocation</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <style>
+      #map {
+        height: 80%;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+
+    <form method="get" name="myform1" onsubmit="return myFunction1()">
+        <fieldset>
+            <legend>Personal information:</legend>
+            User ID: <input type="text" name="user_id"><br>
+            lat : <input type="text" name="lat_a"><br>
+            lng: <input type="text" name="lng_a"><br>
+            <input type="submit" value="Submit" >
+            <button onclick="myFunction()">Click me</button>
+        </fieldset>
+    </form>
+
+    <div id="mydiv1">123<br/></div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div id="map"></div>
+    <script>
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 16
+            });
+            var pos = {lat:24.98, lng:121.55};
+            var infoWindow = new google.maps.InfoWindow({map: map});
+            infoWindow.setPosition(pos)
+            map.setCenter(pos)
+        }
+        function myFunction() {
+          $.ajax({
+                    url:'/getjson',  //print1, print2
+                    type:'get',     //get,    post
+                    // data:{fname:d1},
+                    success:function(result){
+                        $("#mydiv1").html(result);
+                    }
+                })
+          
+        }
+        
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUVMPkDskVQlUsdw92-Ygv9qhIB0UOQH4&callback=initMap">
+    </script>
+  </body>
+</html>

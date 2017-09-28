@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>MY page1</title>
+      <link rel="stylesheet" type="text/css" href=""> 
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <style>
+        </style>
+    </head>
+
+    <body>
+
+            <!-- <form method="get" action="/getpage"  onsubmit="return myFunction1()" name="myform1" > -->
+            <form method="get"  action="/getpage"  name="myform1">
+            <!-- <form method="post" action="/postpage" name="myform1"> -->
+                <input type="button" value="hello" onclick="msg()"><br>
+                <fieldset>
+                  <legend>Personal information:</legend>
+                  First name: <input type="text" name="fname"><br>
+                  Last name: <input type="text" name="lname"><br>
+                  gender:<select name="gender">
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                          <option value="secret" selected>Secret</option>
+                        </select>
+                </fieldset>
+                <fieldset>
+                  <legend>以下為您對木栓院長的市政滿意度調查:</legend>
+                  給木栓院長的祝福:<br>
+                  <textarea name="message" rows="1" cols="50">The cat was playing in the garden.</textarea><br>
+                  台灣人都說愛國,要用國貨. 請問您用的手機品牌:<br>
+                  <input list="browsers" name="brand">
+                  <datalist id="browsers">
+                    <option value="APPLE">
+                    <option value="SAMSUNG">
+                    <option value="SONY">
+                    <option value="HTC">
+                  </datalist><br>
+                  <!-- 嘴巴上說不要用外國貨,身體倒挺誠實的麻？<br> -->
+                  <input type="submit" value="Submit" >
+                  <!-- <input type="submit" value="Submit" onclick="Submit()"> -->
+                </fieldset>
+                <div id="mydiv1"></div>
+
+
+                <p class="pn1">1111</p>
+                <p id="pn2" class="pn1">2222.</p>
+                
+                <button id="hide">Hide</button>
+                <button id="show">Show</button>
+
+              </form>
+
+      <script>         
+
+            function myFunction1() {
+                var d1 = myform1.fname.value;
+                var d2 = myform1.lname.value;
+                var d3 = myform1.gender.value;
+                var d4 = myform1.message.value;
+                var d5 = myform1.brand.value;
+                // alert(document.forms['myform1'].fname.value);
+                // alert(d1 + d2 + d3 + d4 + d5);
+
+
+                $.ajax({
+                    url:'/print',  //print1, print2
+                    type:'post',     //get,    post
+                    data:{fname:d1},
+                    success:function(result){
+                        $("#mydiv1").html(result);
+                    }
+                })
+
+                return false;
+            }
+
+            $(document).ready(function(){
+                $("#hide").click(function(){
+                    $(".pn1").hide();
+                });
+                $("#show").click(function(){
+                    $(".pn1").show();
+                });
+            });
+
+      </script>
+
+    </body>
+    </html>
